@@ -1,0 +1,19 @@
+old_redis:
+  ip: Your source redis ip
+# ip: 18.12.34.11
+  port: 6379
+# password: prashant
+  select_database: all
+# While migrating you will need to select logical databases i.e you may want to select
+# 1. all database so use all 
+# select_database: all
+# 2. To select selected database enter index in form of list
+# select_database: [4,6,9]
+
+no_of_workers: 10
+
+new_redis:
+  ip: Your destination redis ip
+# ip: 18.12.34.11
+  port: 6379
+# password: prashant
