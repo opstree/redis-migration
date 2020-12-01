@@ -1,0 +1,15 @@
+---
+old_redis:
+  host: 172.17.0.2
+  port: 6379
+  username: test
+  password: test
+  databases: [1, 2, 3, 4, 5]
+
+concurrent_workers: 4
+
+new_redis:
+  host: 172.17.0.2
+  port: 6379
+  username: test
+  password: test
