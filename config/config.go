@@ -1,30 +1,22 @@
 package config
 
 import (
-	"io/ioutil"
-	"gopkg.in/yaml.v2"
 	"github.com/sirupsen/logrus"
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
 )
 
 type Configuration struct {
-	OldRedis          OldRedis `yaml:"old_redis"`
-	ConcurrentWorkers int      `yaml:"concurrent_workers"`
-	NewRedis          NewRedis `yaml:"new_redis"`
+	OldRedis          Redis `yaml:"old_redis"`
+	ConcurrentWorkers int   `yaml:"concurrent_workers"`
+	NewRedis          Redis `yaml:"new_redis"`
+	Databases         []int `yaml:"migration_databases"`
 }
 
-type NewRedis struct {
+type Redis struct {
 	Host     string `yaml:"host"`
-	Port     int    `yaml:"port"`
-	Username string `yaml:"username"`
+	Port     string `yaml:"port"`
 	Password string `yaml:"password"`
-}
-
-type OldRedis struct {
-	Host      string `yaml:"host"`
-	Port      int    `yaml:"port"`
-	Username  string `yaml:"username"`
-	Password  string `yaml:"password"`
-	Databases []int  `yaml:"databases"`
 }
 
 // ParseConfig is to parse YAML configuration file

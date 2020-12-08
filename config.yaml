@@ -1,15 +1,14 @@
 ---
 old_redis:
-  host: 172.17.0.2
-  port: 6379
-  username: test
-  password: test
-  databases: [1, 2, 3, 4, 5]
+  host: 172.17.0.3
+  port: "6379"
+  password: ""
+
+migration_databases: [0]
 
 concurrent_workers: 4
 
 new_redis:
-  host: 172.17.0.2
-  port: 6379
-  username: test
-  password: test
+  host: 172.17.0.4
+  port: "6379"
+  password: ""

@@ -1,10 +1,9 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 	"redis-migrator/config"
+	"redis-migrator/migrator"
 )
 
 var migrateCmd = &cobra.Command{
@@ -23,5 +22,5 @@ func init() {
 
 func runMigration() {
 	data := config.ParseConfig(configFilePath)
-	fmt.Println(data)
+	migrator.MigrateRedisData(data)
 }

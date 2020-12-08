@@ -1,8 +1,8 @@
 package main
 
 import (
-	"redis-migrator/cmd"
 	"fmt"
+	"redis-migrator/cmd"
 )
 
 var (
