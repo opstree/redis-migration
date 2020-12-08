@@ -30,19 +30,34 @@ func MigrateRedisData(redConfig config.Configuration) {
 				migrateStringKeys(oldRedisClient, newRedisClient, key)
 			case "hash":
 				migrateHashKeys(oldRedisClient, newRedisClient, key)
+			case "list":
+				migarteListKeys(oldRedisClient, newRedisClient, key)
 			}
 		}
 	}
 }
 
+func migarteListKeys(oldClient redis.Conn, newClient redis.Conn, key string) {
+	value, err := redis.Strings(oldClient.Do("LPOP", key))
+	if err != nil {
+		logrus.Errorf("Not able to get the value for key %s: %v", key, err)
+	}
+	var data = []interface{}{key}
+	for _, v := range value {
+		data = append(data, v)
+	}
+	newClient.Do("LPUSH", data...)
+	logrus.Debugf("Migrated %s key with value: %v", key, data)
+}
+
 func migrateHashKeys(oldClient redis.Conn, newClient redis.Conn, key string) {
 	value, err := redis.StringMap(oldClient.Do("HGETALL", key))
+	if err != nil {
+		logrus.Errorf("Not able to get the value for key %s: %v", key, err)
+	}
 	var data = []interface{}{key}
 	for k, v := range value {
 		data = append(data, k, v)
-	}
-	if err != nil {
-		logrus.Errorf("Not able to get the value for key %s: %v", key, err)
 	}
 	newClient.Do("HMSET", data...)
 	logrus.Debugf("Migrated %s key with value: %v", key, data)
