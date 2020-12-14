@@ -1,0 +1,78 @@
+project_name: redis-migrator
+builds:
+- main: main.go
+  binary: redis-migrator
+  ldflags:
+  - -X main.Version={{ .Version }}
+  - X main.GitCommit={{ .ShortCommit }}
+  env:
+  - CGO_ENABLED=0
+  goos:
+  - darwin
+  - linux
+  - windows
+  goarch:
+  - amd64
+  - 386
+  - arm
+  - arm64
+  goarm:
+  - 7
+
+nfpms:
+  -
+    formats:
+      - deb
+      - rpm
+    vendor: "opstree"
+    homepage: "https://github.com/opstree"
+    maintainer: "Abhishek Dubey <abhishekbhardwaj510@gmail.com>"
+    description: "A tool designed in golang for migrating redis keys"
+    license: "AGPL"
+    file_name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}-{{.Arch}}"
+    replacements:
+      amd64: 64bit
+      386: 32bit
+      arm: ARM
+      arm64: ARM64
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      openbsd: OpenBSD
+      netbsd: NetBSD
+      freebsd: FreeBSD
+      dragonfly: DragonFlyBSD
+
+archives:
+  -
+    format: tar.gz
+    format_overrides:
+    - goos: windows
+      format: zip
+    name_template: "{{.ProjectName}}_{{.Version}}_{{.Os | tolower }}-{{.Arch | tolower}}"
+    replacements:
+      amd64: 64bit
+      386: 32bit
+      arm: ARM
+      arm64: ARM64
+      darwin: macOS
+      linux: Linux
+      windows: Windows
+      openbsd: OpenBSD
+      netbsd: NetBSD
+      freebsd: FreeBSD
+      dragonfly: DragonFlyBSD
+    files:
+    - README.md
+    - LICENSE
+
+brews:
+  -
+    github:
+      owner: opstree
+      name: homebrew-r
+    folder: Formula
+    homepage: "https://github.com/opstree/redis-migration"
+    description: "A tool designed in golang for migrating redis keys."
+    test: |
+      system "#{bin}/program version"
