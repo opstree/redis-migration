@@ -4,7 +4,7 @@ builds:
   binary: redis-migrator
   ldflags:
   - -X main.Version={{ .Version }}
-  - X main.GitCommit={{ .ShortCommit }}
+  - -X main.GitCommit={{ .ShortCommit }}
   env:
   - CGO_ENABLED=0
   goos:
