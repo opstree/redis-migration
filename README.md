@@ -17,3 +17,27 @@ Redis supported keys:-
 - Hash keys
 
 ![](img/architecture.png)
+
+## Quickstart
+
+A quickstart guide for installing, using and managing redis-migrator.
+
+### Installation
+
+redis-migrator installation packages can be found inside [Releases](https://github.com/opstree/redis-migration/releases)
+
+Supported Platforms:-
+
+- Binaries are supported for Linux and Windows platform with these architectures:-
+  - Amd 64
+  - Arm 64
+  - Amd 32
+  - Arm 32
+
+For installation on debian and redhat based system, `.deb` and `.rpm` packages can be used.
+
+For installing on MacOS system, use brew:-
+
+```shell
+brew install redis-migrator
+```
