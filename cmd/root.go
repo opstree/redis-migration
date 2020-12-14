@@ -11,7 +11,6 @@ import (
 
 var (
 	configFilePath string
-	outputFormat   string
 	logLevel       string
 	logFmt         string
 	version        string

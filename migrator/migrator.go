@@ -12,6 +12,9 @@ func MigrateRedisData(redConfig config.Configuration) {
 	for _, database := range redConfig.Databases {
 		logrus.Debugf("Executing migrator for database: %v", database)
 		oldRedisClient, err := client.OldRedisClient(redConfig, database)
+		if err != nil {
+			logrus.Errorf("Error while connecting with redis %v", err)
+		}
 		newRedisClient, err := client.NewRedisClient(redConfig, database)
 		if err != nil {
 			logrus.Errorf("Error while connecting with redis %v", err)
@@ -46,7 +49,10 @@ func migarteListKeys(oldClient redis.Conn, newClient redis.Conn, key string) {
 	for _, v := range value {
 		data = append(data, v)
 	}
-	newClient.Do("LPUSH", data...)
+	_, err = newClient.Do("LPUSH", data...)
+	if err != nil {
+		logrus.Errorf("Error while pushing list keys %v", err)
+	}
 	logrus.Debugf("Migrated %s key with value: %v", key, data)
 }
 
@@ -59,7 +65,10 @@ func migrateHashKeys(oldClient redis.Conn, newClient redis.Conn, key string) {
 	for k, v := range value {
 		data = append(data, k, v)
 	}
-	newClient.Do("HMSET", data...)
+	_, err = newClient.Do("HMSET", data...)
+	if err != nil {
+		logrus.Errorf("Error while pushing list keys %v", err)
+	}
 	logrus.Debugf("Migrated %s key with value: %v", key, data)
 }
 
@@ -68,6 +77,9 @@ func migrateStringKeys(oldClient redis.Conn, newClient redis.Conn, key string) {
 	if err != nil {
 		logrus.Errorf("Not able to get the value for key %s: %v", key, err)
 	}
-	newClient.Do("SET", key, value)
+	_, err = newClient.Do("SET", key, value)
+	if err != nil {
+		logrus.Errorf("Error while pushing list keys %v", err)
+	}
 	logrus.Debugf("Migrated %s key with value: %v", key, value)
 }
