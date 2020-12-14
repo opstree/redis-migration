@@ -62,3 +62,27 @@ new_redis:
   port: "6379"
   password: ""
 ```
+
+### Available Options
+
+There are help page available for redis-migrator which can be called by help or --help command.
+
+```shell
+A tool for migrating redis database and its keys.
+
+Usage:
+  redis-migrator [flags]
+  redis-migrator [command]
+
+Available Commands:
+  help        Help about any command
+  migrate     Runs redis-migrator to run migration
+  version     Prints the current version.
+
+Flags:
+  -h, --help                help for redis-migrator
+      --log.format string   redis-migrator log format. (default "text")
+      --log.level string    redis-migrator logging level. (default "info")
+
+Use "redis-migrator [command] --help" for more information about a command.
+```
