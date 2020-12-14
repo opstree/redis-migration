@@ -68,6 +68,7 @@ new_redis:
 There are help page available for redis-migrator which can be called by help or --help command.
 
 ```shell
+$ redis-migrator help
 A tool for migrating redis database and its keys.
 
 Usage:
@@ -86,3 +87,22 @@ Flags:
 
 Use "redis-migrator [command] --help" for more information about a command.
 ```
+
+### Using redis-migrator
+
+Simply we have to specify the path of `config.yaml`
+
+```shell
+$ redis-migrator migrate --config.file config.yaml
+```
+
+## Roadmap
+
+- [ ] Add cluster support of redus for fast migration
+- [ ] Add golang concurrency to manage worker threads
+
+## Contact
+
+If you have any suggestion or query. Contact us at
+
+opensource@opstree.com
