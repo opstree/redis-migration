@@ -15,3 +15,5 @@ Redis supported keys:-
 
 - String keys
 - Hash keys
+
+![](img/architecture.png)
