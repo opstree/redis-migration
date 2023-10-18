@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 	"github.com/gomodule/redigo/redis"
+	"github.com/opstree/redis-migration/client"
+	"github.com/opstree/redis-migration/config"
 	"github.com/sirupsen/logrus"
-	"redis-migrator/client"
-	"redis-migrator/config"
 )
 
 // MigrateRedisData is the function to migrate keys from old to new redis

@@ -36,10 +36,15 @@ Supported Platforms:-
 
 For installation on debian and redhat based system, `.deb` and `.rpm` packages can be used.
 
-For installing on MacOS system, use brew:-
+For installing on MacOS system, use brew:
 
 ```shell
 brew install redis-migrator
+```
+
+Install via `go install`
+```shell
+go install github.com/opstree/redis-migration@latest
 ```
 
 ### Configuration

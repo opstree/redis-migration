@@ -1,9 +1,9 @@
 package cmd
 
 import (
+	"github.com/opstree/redis-migration/config"
+	"github.com/opstree/redis-migration/migrator"
 	"github.com/spf13/cobra"
-	"redis-migrator/config"
-	"redis-migrator/migrator"
 )
 
 var migrateCmd = &cobra.Command{

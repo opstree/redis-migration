@@ -3,7 +3,7 @@ package client
 import (
 	"fmt"
 	"github.com/gomodule/redigo/redis"
-	"redis-migrator/config"
+	"github.com/opstree/redis-migration/config"
 )
 
 func generateClient(connectionURL string, redisPassword string, redisDatabase int) (redis.Conn, error) {
