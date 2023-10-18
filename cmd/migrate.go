@@ -11,7 +11,9 @@ var migrateCmd = &cobra.Command{
 	Short: "Runs redis-migrator to run migration",
 	Long:  `Runs redis-migrator to run migration`,
 	Run: func(cmd *cobra.Command, args []string) {
-		runMigration()
+		if err := runMigration(); err != nil {
+			panic(err)
+		}
 	},
 }
 
@@ -20,7 +22,7 @@ func init() {
 	rootCmd.AddCommand(migrateCmd)
 }
 
-func runMigration() {
+func runMigration() error {
 	data := config.ParseConfig(configFilePath)
-	migrator.MigrateRedisData(data)
+	return migrator.MigrateRedisData(data)
 }
